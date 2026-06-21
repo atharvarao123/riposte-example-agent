@@ -1,8 +1,4 @@
-# Northwind Internal Assistant
 
-**Intentionally vulnerable demo target** for [Riposte](https://github.com) continuous red-teaming. This application simulates an enterprise employee portal with an AI chat assistant backed by Anthropic tool-use — designed to be probed, scored, and remediated by Riposte's ARiES pipeline.
-
-> **Warning:** Do not deploy publicly. This app contains deliberate security flaws for testing purposes only.
 
 ## Architecture
 
