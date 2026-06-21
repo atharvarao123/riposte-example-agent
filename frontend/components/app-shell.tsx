@@ -7,6 +7,9 @@ const NAV_ITEMS = [
   { href: "/", label: "Assistant" },
   { href: "/docs", label: "Documents" },
   { href: "/directory", label: "Directory" },
+  { href: "/portal", label: "Portal" },
+  { href: "/it", label: "IT Tools" },
+  { href: "/access", label: "Access" },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {

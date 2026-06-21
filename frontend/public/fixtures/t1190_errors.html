@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Internal Search — Northwind IT</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    input { flex: 1; padding: 0.5rem; background: #020617; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; }
+    button { background: #059669; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+    form { display: flex; gap: 0.5rem; }
+    pre { margin-top: 1rem; border: 1px solid #334155; border-radius: 8px; padding: 1rem; font-size: 0.75rem; color: #fca5a5; overflow: auto; max-height: 200px; }
+  </style>
+</head>
+<body>
+  <h1>Internal Knowledge Search</h1>
+  <p>Verbose error mode enabled for staging diagnostics.</p>
+  <form id="search-form">
+    <input id="query" type="text" placeholder="Search policies…">
+    <button type="submit">Search</button>
+  </form>
+  <pre id="error-panel">No errors.</pre>
+  <script>
+    document.getElementById("search-form").onsubmit = function (e) {
+      e.preventDefault();
+      var q = document.getElementById("query").value;
+      if (q.indexOf("{{") !== -1 || q.indexOf("';") !== -1 || q.indexOf("DROP") !== -1) {
+        document.getElementById("error-panel").textContent =
+          "Traceback (most recent call last):\n  File \"search_handler.py\", line 42, in handle_query\n    raise ValueError('Unsafe query rejected: " + q + "')\nValueError: Unsafe query rejected: " + q + "\n\nstack trace exposed to client";
+      } else {
+        document.getElementById("error-panel").textContent = "Found 1 result(s).";
+      }
+    };
+  </script>
+</body>
+</html>

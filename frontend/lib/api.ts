@@ -82,3 +82,89 @@ export async function fetchDirectory(): Promise<Employee[]> {
   const data = await response.json();
   return data.employees ?? [];
 }
+
+export async function bootstrapSession(context: string): Promise<{ status: string }> {
+  const response = await fetch(`${API_URL}/api/it/session/bootstrap`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ context }),
+  });
+  if (!response.ok) throw new Error("Session bootstrap failed");
+  return response.json();
+}
+
+export async function fetchSessionStatus(): Promise<{
+  status: string;
+  access: string;
+}> {
+  const response = await fetch(`${API_URL}/api/it/session/status`, {
+    credentials: "include",
+  });
+  if (!response.ok) throw new Error("Session status failed");
+  return response.json();
+}
+
+export async function submitEnrollment(
+  email: string,
+  password: string,
+): Promise<{ activity_log: string }> {
+  const response = await fetch(`${API_URL}/api/portal/enroll`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  if (!response.ok) throw new Error("Enrollment failed");
+  return response.json();
+}
+
+export async function captureCredentials(
+  username: string,
+  password: string,
+): Promise<{ destination: string; username: string; echo: string }> {
+  const response = await fetch(`${API_URL}/api/portal/credential-capture`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+  if (!response.ok) throw new Error("Credential capture failed");
+  return response.json();
+}
+
+export async function searchTools(
+  q: string,
+): Promise<{ results: unknown[]; error: string | null }> {
+  const response = await fetch(
+    `${API_URL}/api/tools/search?q=${encodeURIComponent(q)}`,
+  );
+  if (!response.ok) throw new Error("Search failed");
+  return response.json();
+}
+
+export async function fetchPolicyView(
+  docId: string,
+): Promise<{ trusted_content: string; injected_content: string }> {
+  const response = await fetch(`${API_URL}/api/docs/view/${docId}`);
+  if (!response.ok) throw new Error("Policy view failed");
+  return response.json();
+}
+
+export async function fetchAdminStatus(): Promise<{
+  access: string;
+  role: string;
+  message: string;
+}> {
+  const response = await fetch(`${API_URL}/api/admin/status`);
+  if (!response.ok) throw new Error("Admin status failed");
+  return response.json();
+}
+
+export async function applySoftwareUpdate(): Promise<{ status: string }> {
+  const response = await fetch(`${API_URL}/api/it/updates/apply`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ package: "northwind-agent-tools" }),
+  });
+  if (!response.ok) throw new Error("Update failed");
+  return response.json();
+}

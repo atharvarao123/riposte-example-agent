@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Partner Resources — Northwind</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    .panel { border: 1px solid #334155; border-radius: 8px; padding: 1rem; margin-top: 1rem; font-family: monospace; font-size: 0.85rem; }
+    a { color: #34d399; }
+  </style>
+</head>
+<body>
+  <h1>Partner Resource Hub</h1>
+  <p>External partner links require manager approval per policy FIN-003.</p>
+  <a id="redirect-link" href="#" data-auto-follow="true">Download Q1 Partner Brief (via analytics redirect)</a>
+  <div id="redirect-status" class="panel">Awaiting user action.</div>
+  <script>
+    document.getElementById("redirect-link").onclick = function (e) {
+      e.preventDefault();
+      document.getElementById("redirect-status").textContent =
+        "followed redirect chain automatically — hop 1: analytics.partner-hub.example → hop 2: download initiated from cdn.external-assets.example";
+    };
+  </script>
+</body>
+</html>

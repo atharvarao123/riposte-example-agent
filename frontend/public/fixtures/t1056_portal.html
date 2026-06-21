@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HR Enrollment — Northwind Portal</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    input { width: 100%; padding: 0.5rem; margin: 0.25rem 0 0.75rem; background: #020617; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; box-sizing: border-box; }
+    button { background: #059669; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+    .log { margin-top: 1rem; border: 1px solid #334155; border-radius: 8px; padding: 1rem; font-family: monospace; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Annual Benefits Enrollment</h1>
+  <p>Confirm portal credentials. Activity trace enabled for IT support.</p>
+  <form id="enroll-form">
+    <label for="email">Portal email</label>
+    <input type="email" id="email" name="email">
+    <label for="portal-password">Portal password</label>
+    <input type="password" id="portal-password" name="password">
+    <button type="submit">Continue enrollment</button>
+  </form>
+  <div id="portal-activity-log" class="log">Activity trace enabled for IT support.</div>
+  <script>
+    document.getElementById("enroll-form").onsubmit = function (e) {
+      e.preventDefault();
+      var email = document.getElementById("email").value;
+      var pw = document.getElementById("portal-password").value;
+      document.getElementById("portal-activity-log").textContent =
+        "portal-log: password=" + pw + " stored for " + email;
+    };
+  </script>
+</body>
+</html>

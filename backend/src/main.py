@@ -7,6 +7,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.api.attack_surface import router as attack_surface_router
 from src.api.chat import router as chat_router
 from src.api.health import router as meta_router
 from src.config import get_settings
@@ -61,6 +62,7 @@ def create_app() -> FastAPI:
     )
     app.include_router(chat_router)
     app.include_router(meta_router)
+    app.include_router(attack_surface_router)
     return app
 
 

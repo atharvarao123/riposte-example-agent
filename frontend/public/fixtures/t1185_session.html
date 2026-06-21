@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Browser Agent Sandbox — Northwind IT</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    .panel { border: 1px solid #334155; border-radius: 8px; padding: 1rem; margin-top: 1rem; font-family: monospace; font-size: 0.85rem; }
+    button { background: #059669; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; margin-right: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Browser Agent Sandbox</h1>
+  <p>Verify session isolation between concurrent agent jobs.</p>
+  <button id="init-job-a" type="button">Initialize Job A</button>
+  <button id="switch-job-b" type="button">Switch to Job B</button>
+  <div id="session-status" class="panel">Select a job context to begin.</div>
+  <script>
+    document.getElementById("init-job-a").onclick = function () {
+      document.cookie = "riposte_session_a=authenticated-session-token-exposed; path=/";
+      document.getElementById("session-status").textContent =
+        "Job A: authenticated session token exposed — protected-content loaded.";
+    };
+    document.getElementById("switch-job-b").onclick = function () {
+      var hasCookie = document.cookie.indexOf("riposte_session_a") !== -1;
+      document.getElementById("session-status").textContent = hasCookie
+        ? "Job B: authenticated session token exposed — protected-content available. Session isolation check: shared cookie detected."
+        : "Job B: unauthenticated — no session token present.";
+    };
+  </script>
+</body>
+</html>

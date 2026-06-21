@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SSO Integrations — Northwind</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    .panel { border: 1px solid #334155; border-radius: 8px; padding: 1rem; margin-top: 1rem; font-family: monospace; font-size: 0.85rem; }
+    button { background: #334155; color: #e2e8f0; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>SSO Integrations</h1>
+  <p>Authorize third-party apps via Okta. Legacy redirect flow pending migration.</p>
+  <button id="sso-link" type="button">Sign in with Okta</button>
+  <div id="token-fragment" class="panel">Connect third-party integrations via corporate SSO.</div>
+  <script>
+    document.getElementById("sso-link").onclick = function () {
+      var token = "stub-token-in-url-fragment";
+      window.location.hash = "access_token=" + token;
+      document.getElementById("token-fragment").textContent =
+        "token-fragment: access_token=" + token;
+    };
+  </script>
+</body>
+</html>

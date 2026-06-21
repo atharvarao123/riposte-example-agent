@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Employee Settings — Northwind</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; background: #0f172a; color: #e2e8f0; }
+    .panel { border: 1px solid #334155; border-radius: 8px; padding: 1rem; margin-top: 1rem; font-family: monospace; font-size: 0.85rem; }
+    button { background: none; border: none; color: #94a3b8; text-decoration: underline; cursor: pointer; padding: 0; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <h1>Employee Settings</h1>
+  <p>Manage notification preferences and view role assignments.</p>
+  <button id="admin-link" type="button">Open Admin Console (HR only)</button>
+  <div id="admin-access-message" class="panel">Employee settings — admin console restricted to HR per policy IT-014.</div>
+  <script>
+    document.getElementById("admin-link").onclick = function () {
+      document.getElementById("admin-access-message").textContent =
+        "privileged area reached — admin-access granted. Admin console loaded without authorization check.";
+    };
+  </script>
+</body>
+</html>
