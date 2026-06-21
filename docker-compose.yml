@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-haiku-4-5}
+      MAX_TOKENS: ${MAX_TOKENS:-384}
+      MAX_TOKENS_TOOL_STEP: ${MAX_TOKENS_TOOL_STEP:-256}
+      MAX_LLM_CONTEXT_TURNS: ${MAX_LLM_CONTEXT_TURNS:-4}
+      SUGGESTED_REPLY_DELAY_MS: ${SUGGESTED_REPLY_DELAY_MS:-1100}
+      CORS_ORIGINS: http://localhost:3000
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+    depends_on:
+      - backend
