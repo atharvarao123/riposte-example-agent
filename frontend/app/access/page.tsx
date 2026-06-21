@@ -3,6 +3,10 @@ import { AdminAccessPanel } from "@/components/attack-surface/admin-access-panel
 import { PartnerResourcesPanel } from "@/components/attack-surface/partner-resources-panel";
 import { SsoPanel } from "@/components/attack-surface/sso-panel";
 
+export const metadata = {
+  referrer: "no-referrer",
+};
+
 export default function AccessPage() {
   return (
     <AppShell>
@@ -15,7 +19,13 @@ export default function AccessPage() {
         </div>
         <AdminAccessPanel />
         <SsoPanel />
-        <PartnerResourcesPanel />
+        <div
+          // Browser sandboxing: isolate partner resources to mitigate drive-by compromise (T1189)
+          // Download gating and navigation restrictions are enforced inside the panel.
+          sandbox=""
+        >
+          <PartnerResourcesPanel />
+        </div>
       </div>
     </AppShell>
   );
